@@ -1,18 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ResourceStorage : MonoBehaviour
 {
-    [SerializeField,SerializeInterface(typeof(IResourceCounter))] private List<GameObject> _resourceCounterObjects;
+    [SerializeField] private List<Counter> _counters;
     [SerializeField] private ResourceSpawner _resourceSpawner;
 
-    private List<IResourceCounter> _counters = new();
+    private readonly Dictionary<Type, ICounter> _resourceCounters = new();
 
     private void Awake()
     {
-        foreach(GameObject counter in _resourceCounterObjects)
-            _counters.Add(counter.GetComponent<IResourceCounter>());
+        InitCounters();
     }
 
     private void OnEnable()
@@ -27,19 +27,13 @@ public class ResourceStorage : MonoBehaviour
 
     private void Sort(Resource resource)
     {
-        Type resourceType = resource.GetType();
+        if (_resourceCounters.TryGetValue(resource.GetType(), out ICounter counter))
+            counter.Add(); 
+    }
 
-        foreach (IResourceCounter counter in _counters)
-        {
-            Type genericType = counter.GetType().BaseType;
-
-            if (genericType != null && genericType.IsGenericType)
-            {
-                Type resourceCounterType = genericType.GetGenericArguments()[0];
-
-                if (resourceType == resourceCounterType)
-                    counter.Add();  
-            }
-        }
+    private void InitCounters()
+    {
+        _resourceCounters.Add(typeof(Wood), _counters.FirstOrDefault(counter => counter.GetType() == typeof(WoodCounter)));
+        _resourceCounters.Add(typeof(Rock), _counters.FirstOrDefault(counter => counter.GetType() == typeof(RockCounter)));
     }
 }

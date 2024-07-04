@@ -1,4 +1,4 @@
-public class RockView : ResourceCounterView<RockCounter>
+public class RockView : CounterView<RockCounter>
 {
     private readonly string _amountText = "камня: ";
 

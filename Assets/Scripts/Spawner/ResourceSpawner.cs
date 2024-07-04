@@ -5,6 +5,7 @@ using UnityEngine;
 public class ResourceSpawner : Spawner<Resource>
 {
     [SerializeField] private SpawnPointStorage _spawnPointStorage;
+    [SerializeField] private TransformSetter _transformSetter;
     [SerializeField] private float _delay;
 
     private Coroutine _spawnCoroutine;
@@ -20,7 +21,8 @@ public class ResourceSpawner : Spawner<Resource>
     {
         SpawnPoint spawnPoint = _spawnPointStorage.GetAvailable(resource);
 
-        resource.OnSpawn(spawnPoint.transform.position);
+        _transformSetter.Set(resource.transform, spawnPoint.transform.position);
+        resource.gameObject.SetActive(true);
         resource.Collected += ReleaseSpawnable;
     }
 

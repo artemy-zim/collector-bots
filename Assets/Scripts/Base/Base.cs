@@ -1,12 +1,14 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Base : MonoBehaviour, ITarget
+public class Base : MonoBehaviour, ITarget, IInteractable
 {
     [SerializeField] private BotStorage _botStorage;
     [SerializeField] private Scanner _scanner;
-
     [SerializeField] private float _sendBotsDelay;
+
+    private readonly List<Resource> _assignedResources = new();
 
     private void Start()
     {
@@ -20,19 +22,20 @@ public class Base : MonoBehaviour, ITarget
 
     private void SendBots()
     {
-        List<IResource> resources = GetAvailableResources();
+        List<Resource> resources = GetAvailableResources();
 
         if (resources.Count > 0)
             AssignResourcesToBots(resources);
     }
 
-    private void AssignResourcesToBots(List<IResource> resources)
+    private void AssignResourcesToBots(List<Resource> resources)
     {
-        foreach (IResource resource in resources)
+        foreach (Resource resource in resources)
         {
             if (_botStorage.TryGetBot(out IBot bot))
             {
                 bot.AssignResource(resource);
+                _assignedResources.Add(resource);
                 bot.ResourceCollected += OnResourceCollected;
             }
             else
@@ -42,14 +45,17 @@ public class Base : MonoBehaviour, ITarget
         }
     }
 
-    private void OnResourceCollected(IBot bot)
+    private void OnResourceCollected(IBot bot, Resource resource)
     {
         bot.ResourceCollected -= OnResourceCollected;
+        _assignedResources.Remove(resource);
         _botStorage.AddBot(bot);
     }
 
-    private List<IResource> GetAvailableResources()
+    private List<Resource> GetAvailableResources()
     {
-        return _scanner.GetResources(_botStorage.BotsAmount);
+        int availableBotsAmount = _botStorage.BotsAmount;
+
+        return _scanner.GetResources(_assignedResources, availableBotsAmount);
     }
 }

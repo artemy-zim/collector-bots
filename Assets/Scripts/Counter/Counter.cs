@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-public class ResourceCounter<T> : MonoBehaviour, IResourceCounter where T : Resource
+public class Counter : MonoBehaviour, ICounter
 {
-    private int _count = 0;
+    private int _count;
 
     public event Action<int> CountChanged;
 

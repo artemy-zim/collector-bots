@@ -3,21 +3,14 @@ using UnityEngine;
 
 public class Bot : MonoBehaviour, IBot
 {
-    [SerializeField, SerializeInterface(typeof(ITargetMover))] private GameObject _mover;
-    [SerializeField] private Base _base;
+    [SerializeField] private TargetMover _mover;
     [SerializeField] private TriggerHandler _triggerHandler;
     [SerializeField] private GrabPoint _grabPoint;
 
-    private IResource _assignedResource;
-    private ITargetMover _targetMover;
-    private bool _isResourcePicked = false;
+    private Base _base;
+    private Resource _assignedResource;
 
-    public event Action<IBot> ResourceCollected;
-
-    private void Awake()
-    {
-        _targetMover = _mover.GetComponent<ITargetMover>();
-    }
+    public event Action<IBot, Resource> ResourceCollected;
 
     private void OnEnable()
     {
@@ -29,38 +22,33 @@ public class Bot : MonoBehaviour, IBot
         _triggerHandler.TriggerEntered -= ProcessTrigger;
     }
 
-    public void AssignResource(IResource resource)
+    public void Init(Base @base)
     {
-        if (resource is ITarget target)
-        {
-            _targetMover.AssignTarget(target);
-            _assignedResource = resource;
-            _assignedResource.SetAssignedStatus(true);
-        }
+        _base = @base;
     }
 
-    private void ProcessTrigger(ITarget target)
+    public void AssignResource(Resource resource)
     {
-        if (target == _base as ITarget)
-        {
-            if (_isResourcePicked == true)
-            {
-                _targetMover.Stop();
-                _isResourcePicked = false;
-                _assignedResource.SetAssignedStatus(false);
-                _assignedResource = null;
-                ResourceCollected?.Invoke(this);
-            }
-        }
+        _mover.AssignTarget(resource);
+        _assignedResource = resource;
+        resource.Collected += OnCollected;
+    }
 
-        if (target is IPickable pickable)
+    private void OnCollected(Resource resource)
+    {
+        resource.Collected -= OnCollected;
+        _assignedResource = null;
+        _mover.Stop();
+        ResourceCollected?.Invoke(this, resource);
+    }
+
+    private void ProcessTrigger(IInteractable interactable)
+    {
+        if (interactable == _assignedResource as IInteractable)
         {
-            if (_assignedResource == pickable as IResource)
-            {
-                pickable.OnPick(_grabPoint);
-                _targetMover.AssignTarget(_base);
-                _isResourcePicked = true;
-            }
+            _assignedResource.transform.position = _grabPoint.transform.position;
+            _assignedResource.transform.SetParent(transform);
+            _mover.AssignTarget(_base);
         }
     }
 }

@@ -2,7 +2,9 @@ using System;
 
 public interface IBot
 {
-    public event Action<IBot> ResourceCollected;
+    public event Action<IBot, Resource> ResourceCollected;
 
-    public void AssignResource(IResource resource);
+
+    public void Init(Base @base);
+    public void AssignResource(Resource resource);
 }

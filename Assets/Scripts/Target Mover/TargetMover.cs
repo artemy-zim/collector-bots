@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class TargetMover : MonoBehaviour, ITargetMover
+public class TargetMover : MonoBehaviour
 {
-    [SerializeField, SerializeInterface(typeof(IRotator))] private GameObject _rotatorObject;
-    [SerializeField, SerializeInterface(typeof(IMover))] private GameObject _moverObject;
+    [SerializeField, SerializeInterface(typeof(IRotator))] private Rotator _rotatorObject;
+    [SerializeField, SerializeInterface(typeof(IMover))] private Mover _moverObject;
 
     private IRotator _rotator;
     private IMover _mover;
@@ -12,8 +12,8 @@ public class TargetMover : MonoBehaviour, ITargetMover
 
     private void Awake()
     {
-        _rotator = _rotatorObject.GetComponent<IRotator>();
-        _mover = _moverObject.GetComponent<IMover>();
+        _rotator = _rotatorObject.TryGetComponent(out IRotator rotator) ? rotator : null;
+        _mover = _moverObject.TryGetComponent(out IMover mover) ? mover : null;
     }
 
     public void AssignTarget(ITarget target)

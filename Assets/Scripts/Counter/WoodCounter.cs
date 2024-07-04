@@ -1,1 +1,2 @@
-public class WoodCounter : ResourceCounter<Wood> { }
+
+public class WoodCounter : Counter { }

@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public abstract class ResourceCounterView<T> : MonoBehaviour where T : IResourceCounter
+public abstract class CounterView<T> : MonoBehaviour where T : ICounter
 {
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private T _counter;

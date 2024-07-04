@@ -1,19 +1,19 @@
 using System;
 using UnityEngine;
 
-[RequireComponent (typeof(BoxCollider))]
+[RequireComponent (typeof(Collider))]
 public class TriggerHandler : MonoBehaviour
 {
-    public event Action<ITarget> TriggerEntered;
+    public event Action<IInteractable> TriggerEntered;
 
     private void OnValidate()
     {
-        GetComponent<BoxCollider>().isTrigger = true;
+        GetComponent<Collider>().isTrigger = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out ITarget target))
+        if(other.TryGetComponent(out IInteractable target))
             TriggerEntered?.Invoke(target);
     }
 }

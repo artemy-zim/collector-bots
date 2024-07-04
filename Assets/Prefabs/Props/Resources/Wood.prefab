@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 23164466822775924}
   - component: {fileID: 136446958062920886}
   - component: {fileID: 5483136281044913207}
-  - component: {fileID: 1091328957445572598}
-  m_Layer: 0
+  - component: {fileID: 3680854268453641023}
+  m_Layer: 6
   m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360994071702760}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &33809962535929728
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -121,9 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f12a3d819e9e3c844b645f8fc06f6383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _angleCalcObject: {fileID: 1360994071702760}
-  _collider: {fileID: 136446958062920886}
---- !u!114 &1091328957445572598
+  _triggerHandler: {fileID: 3680854268453641023}
+--- !u!114 &3680854268453641023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,6 +131,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1360994071702760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7268dcc928ed5fb49b615a92d735a7ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 4942468a62c96c7498626b257ec2c446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

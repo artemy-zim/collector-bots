@@ -5,7 +5,7 @@ public class SpawnPointStorage : MonoBehaviour
 {
     [SerializeField] private List<SpawnPoint> _spawnPoints;
 
-    private Dictionary<Resource, SpawnPoint> _takenSpawnPoints = new();
+    private readonly Dictionary<Resource, SpawnPoint> _takenSpawnPoints = new();
 
     public bool IsNotEmpty => _spawnPoints.Count > 0;
 

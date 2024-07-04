@@ -1,4 +1,4 @@
-public class WoodView : ResourceCounterView<WoodCounter>
+public class WoodView : CounterView<WoodCounter>
 {
     private readonly string _amountText = "дерева: ";
 

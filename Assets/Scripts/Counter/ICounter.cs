@@ -1,6 +1,6 @@
 using System;
 
-public interface IResourceCounter
+public interface ICounter
 {
     public event Action<int> CountChanged;
 

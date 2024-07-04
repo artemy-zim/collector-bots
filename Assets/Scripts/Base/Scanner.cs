@@ -3,21 +3,22 @@ using UnityEngine;
 
 public class Scanner : MonoBehaviour
 {
+    [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float x;
     [SerializeField] private float z;
 
     private readonly float y = 1f;
 
-    public List<IResource> GetResources(int amount)
+    public List<Resource> GetResources(List<Resource> assignedResources, int amount)
     {
         Collider[] colliders = GetColliders(amount);
-        List<IResource> resources = new();
+        List<Resource> resources = new();
 
-        foreach(Collider collider in colliders)
+        foreach (Collider collider in colliders)
         {
-            if(collider.gameObject.activeSelf && collider.TryGetComponent(out IResource resource))
+            if (collider != null && collider.gameObject.activeSelf && collider.TryGetComponent(out Resource resource))
             {
-                if(resource.IsAssigned() == false)
+                if(assignedResources.Contains(resource) == false)
                     resources.Add(resource);
             }
         }
@@ -29,7 +30,7 @@ public class Scanner : MonoBehaviour
     {
         Collider[] colliders = new Collider[amount];
         Vector3 halfExtents = new(x, y, z);
-        int collidersCount = Physics.OverlapBoxNonAlloc(transform.position, halfExtents, colliders, Quaternion.identity);
+        int collidersCount = Physics.OverlapBoxNonAlloc(transform.position, halfExtents, colliders, Quaternion.identity, _layerMask);
 
         CleanColliders(colliders, collidersCount);
 

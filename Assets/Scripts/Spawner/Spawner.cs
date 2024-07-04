@@ -20,7 +20,7 @@ public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour, ISpawn
         _pool = new ObjectPool<T>(
             createFunc: () => Instantiate(_spawnables[Random.Range(0, _spawnables.Length)]),
             actionOnGet: (spawnable) => Spawn(spawnable),
-            actionOnRelease: (spawnable) => spawnable.OnDespawn(),
+            actionOnRelease: (spawnable) => spawnable.Reset(),
             actionOnDestroy: (spawnable) => Destroy(spawnable),
             collectionCheck: true,
             defaultCapacity: _poolSize,

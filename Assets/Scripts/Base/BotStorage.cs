@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class BotStorage : MonoBehaviour
 {
-    [SerializeField, SerializeInterface(typeof(IBot))] private GameObject[] _botObjects;
+    [SerializeField, SerializeInterface(typeof(IBot))] private Bot[] _botObjects;
+    [SerializeField] private Base _base;
 
     private readonly Queue<IBot> _bots = new();
 
@@ -11,8 +12,7 @@ public class BotStorage : MonoBehaviour
 
     private void Awake()
     {
-        foreach(GameObject bot in _botObjects)
-            _bots.Enqueue(bot.GetComponent<IBot>());
+        InitBots();
     }
 
     public bool TryGetBot(out IBot bot)
@@ -32,6 +32,18 @@ public class BotStorage : MonoBehaviour
     public void AddBot(IBot bot)
     {
         _bots.Enqueue(bot);
+    }
+
+    private void InitBots()
+    {
+        foreach (Bot botObject in _botObjects)
+        {
+            if (botObject.TryGetComponent(out IBot bot))
+            {
+                bot.Init(_base);
+                _bots.Enqueue(bot);
+            }
+        }
     }
 
     private bool IsEmpty()

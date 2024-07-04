@@ -239,7 +239,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.981345, y: 3.537807, z: 9.253577}
+  m_Size: {x: 4.9, y: 3.537807, z: 6.35}
   m_Center: {x: -0.00837934, y: 1.6345966, z: -0.45637512}
 --- !u!54 &5818454460467176665
 Rigidbody:
@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _botObjects: []
+  _base: {fileID: 0}
 --- !u!114 &6777401654916185004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa5a6fca4e354340b3f6279b9ac1af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   x: 55
   z: 45
 --- !u!114 &5082738670009041442
@@ -322,9 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e46d36e5bc516994eaf731e91278a9f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _resourceCounterObjects:
-  - {fileID: 7572907601708596396}
-  - {fileID: 3016205398140155294}
+  _counters: []
   _resourceSpawner: {fileID: 0}
 --- !u!4 &1798000005016949513 stripped
 Transform:

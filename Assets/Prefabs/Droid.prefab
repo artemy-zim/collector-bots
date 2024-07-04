@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.28
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       propertyPath: m_LocalPosition.z
@@ -120,9 +120,6 @@ PrefabInstance:
       addedObject: {fileID: 2190261530741849724}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 856464651771450549}
-    - targetCorrespondingSourceObject: {fileID: 100000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2029216006329348332}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}
       insertIndex: -1
@@ -160,33 +157,12 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 1.5}
---- !u!65 &856464651771450549
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410625678463782412}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 7, z: 1}
-  m_Center: {x: 0, y: 0, z: 5.27}
 --- !u!54 &2029216006329348332
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -226,8 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346b8980f76419e4f9f1e131f10352e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mover: {fileID: 1410625678463782412}
-  _base: {fileID: 0}
+  _mover: {fileID: 8139311054959968987}
   _triggerHandler: {fileID: 2332607390640892897}
   _grabPoint: {fileID: 3056135901888801410}
 --- !u!114 &5152498795936050652
@@ -280,8 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469266897a0476a4286c32f5863dcfbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotatorObject: {fileID: 1410625678463782412}
-  _moverObject: {fileID: 1410625678463782412}
+  _rotatorObject: {fileID: 5152498795936050652}
+  _moverObject: {fileID: 2436033234682510026}
 --- !u!4 &1410625678464209452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: d8cf9ba52095a4f4bb35e68774cfa634, type: 3}

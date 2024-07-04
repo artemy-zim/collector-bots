@@ -13,13 +13,13 @@ public class SerializeInterfaceDrawer : PropertyDrawer
         UpdatePropertyValue(property, requiredType);
         UpdateDropIcon(position, requiredType);
 
-        property.objectReferenceValue = EditorGUI.ObjectField(position, label, property.objectReferenceValue, typeof(GameObject), true);
+        property.objectReferenceValue = EditorGUI.ObjectField(position, label, property.objectReferenceValue, typeof(MonoBehaviour), true);
     }
 
     private bool IsInvalidObject(Object @object ,Type requiredType)
     {
-        if(@object is GameObject gameObject)
-            return gameObject.GetComponent(requiredType) == null;
+        if(@object is MonoBehaviour mono)
+            return mono.GetComponent(requiredType) == null;
 
         return true;
     }
