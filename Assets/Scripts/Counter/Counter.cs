@@ -1,15 +1,8 @@
-using System;
 using UnityEngine;
 
-public class Counter : MonoBehaviour, ICounter
+public abstract class Counter : MonoBehaviour
 {
-    private int _count;
+    protected int Count;
 
-    public event Action<int> CountChanged;
-
-    public void Add()
-    {
-        _count++;
-        CountChanged?.Invoke(_count);
-    }
+    public abstract void Add();
 }

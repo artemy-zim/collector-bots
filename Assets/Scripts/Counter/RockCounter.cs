@@ -1,1 +1,1 @@
-public class RockCounter : Counter { }
+public class RockCounter : ResourceCounter { }
